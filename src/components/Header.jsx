@@ -33,13 +33,12 @@ export default function({setPage}) {
         <div className="header__right">
           <ul className="menu">
             {
-              [...pages].map(function(page) {
-                return (
+              [...pages].map(page => (
                   <li key={page} className="menu__item">
                     <a href={'#' + page} onClick={goToPage(page)} className="menu__link">{pages[page]}</a>
                   </li>
                 )
-              })
+              )
             }
           </ul>
         </div>
