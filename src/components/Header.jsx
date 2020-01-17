@@ -18,6 +18,10 @@ export default function({setPage}) {
       }
     }
   }
+  const goToPage = (page) => (e) => {
+    e.preventDefault();
+    setPage(page)
+  }
   return (
     <header className="header">
       <div className="container container_header">
@@ -32,7 +36,7 @@ export default function({setPage}) {
               [...pages].map(function(page) {
                 return (
                   <li key={page} className="menu__item">
-                    <a href={'#' + page} onClick={(e) => {e.preventDefault(); setPage(page)}} className="menu__link">{pages[page]}</a>
+                    <a href={'#' + page} onClick={goToPage(page)} className="menu__link">{pages[page]}</a>
                   </li>
                 )
               })

@@ -1,8 +1,47 @@
 import React from 'react';
 export default class SignupPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
+  inputs = [
+    {
+      id: 'email',
+      text: 'Адрес электронной почты',
+    },
+    {
+      column: [
+        {
+          id: 'firstName',
+          text: 'Имя',
+        },
+        {
+          id: 'secondName',
+          text: 'Фамилия',
+        },
+      ],
+    },
+    {
+      id: 'password',
+      text: 'Пароль',
+    }
+  ]
+  renderInputs(inputs) {
+    return inputs.map((input) => {
+      if (input.column) {
+        return this.renderInputs(input.column);
+      }
+      return (
+        <div className="form__row">
+          <label htmlFor={input.id} className="form__label">{input.text}</label>
+          <input type="text" id={input.id} name={input.id} className="form__input input" />
+        </div>
+      )
+    })
+  }
+  goToPageMap = (e) => {
+    e.preventDefault();
+    this.props.setPage("map")
+  }
+  goToPageLogin = (e) => {
+    e.preventDefault();
+    this.props.setPage("login")
   }
   render() {
     return (
@@ -18,29 +57,12 @@ export default class SignupPage extends React.Component {
               <div className="login__title">Регистрация</div>
               <div className="login__desc">
                 Уже зарегистрированы?
-                <a href="#login" onClick={(e) => {e.preventDefault(); this.props.setPage("login")}} className="login__link">Войти</a>
+                <a href="#login" onClick={this.goToPageLogin} className="login__link">Войти</a>
               </div>
               <form action="" className="login__form form">
+                {this.renderInputs(this.inputs)}
                 <div className="form__row">
-                  <label htmlFor="email" className="form__label">Адрес электронной почты</label>
-                  <input type="text" id="email" name="email" className="form__input input" />
-                </div>
-                <div className="form__column">
-                  <div className="form__row">
-                    <label htmlFor="firstName" className="form__label">Имя</label>
-                    <input type="text" id="firstName" name="firstName" className="form__input input" />
-                  </div>
-                  <div className="form__row">
-                    <label htmlFor="secondName" className="form__label">Фамилия</label>
-                    <input type="text" id="secondName" name="secondName" className="form__input input" />
-                  </div>
-                </div>
-                <div className="form__row">
-                  <label htmlFor="password" className="form__label">Пароль</label>
-                  <input type="text" id="password" name="password" className="form__input input" />
-                </div>
-                <div className="form__row">
-                  <button onClick={(e) => {e.preventDefault(); this.props.setPage("map")}} className="form__button button">Зарегистрироваться</button>
+                  <button onClick={this.goToPageMap} className="form__button button">Зарегистрироваться</button>
                 </div>
               </form>
             </div>

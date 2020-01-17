@@ -1,8 +1,35 @@
 import React from 'react';
 export default class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
+  inputs = [
+    {
+      id: 'login',
+      text: 'Имя пользователя*',
+    },
+    {
+      id: 'password',
+      text: 'Пароль*',
+    }
+  ];
+  renderInputs(inputs) {
+    return inputs.map((input) => {
+      if (input.column) {
+        return this.renderInputs(input.column);
+      }
+      return (
+        <div className="form__row">
+          <label htmlFor={input.id} className="form__label">{input.text}</label>
+          <input type="text" id={input.id} name={input.id} className="form__input input" />
+        </div>
+      )
+    })
+  }
+  goToPageMap = (e) => {
+    e.preventDefault();
+    this.props.setPage("map")
+  }
+  goToPageSignup = (e) => {
+    e.preventDefault();
+    this.props.setPage("signup")
   }
   render() {
     return (
@@ -18,19 +45,12 @@ export default class LoginPage extends React.Component {
               <div className="login__title">Войти</div>
               <div className="login__desc">
                 Новый пользователь?
-                <a href="#signup" onClick={(e) => {e.preventDefault(); this.props.setPage("signup")}} className="login__link">Зарегистрируйтесь</a>
+                <a href="#signup" onClick={this.goToPageSignup} className="login__link">Зарегистрируйтесь</a>
               </div>
               <form action="" className="login__form form">
+                {this.renderInputs(this.inputs)}
                 <div className="form__row">
-                  <label htmlFor="login" className="form__label">Имя пользователя*</label>
-                  <input type="text" id="login" name="login" className="form__input input" />
-                </div>
-                <div className="form__row">
-                  <label htmlFor="password" className="form__label">Пароль*</label>
-                  <input type="text" id="password" name="password" className="form__input input" />
-                </div>
-                <div className="form__row">
-                  <button onClick={(e) => {e.preventDefault(); this.props.setPage("map")}} className="form__button button">Войти</button>
+                  <button onClick={this.goToPageMap} className="form__button button">Войти</button>
                 </div>
               </form>
             </div>
