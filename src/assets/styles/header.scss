@@ -1,0 +1,31 @@
+.container{
+  &_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.header{
+  position: relative;
+  background-color: $white;
+  padding: 20px 0;
+}
+.logo{
+  width: 154px;
+  height: 37px;
+  &__img{
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+.menu{
+  display: flex;
+  align-items: center;
+  &__item{
+    margin-right: 30px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+#root{
+  height: 100%;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'AdobeClean', Helvetica, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.42;
+  color: $gray;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $white;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: url('/img/bg.jpg');
+  background-size: cover;
+  &:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: block;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1170px;
+  height: 100%;
+  &_main{
+    display: flex;
+    align-items: center;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+.title{
+  position: relative;
+  color: $white;
+}
+
+.form{
+  &__column{
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    .form__row:first-child{
+      margin-right: 15px;
+      margin-bottom: 0;
+    }
+  }
+  &__row{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    width: 100%;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  &__label{
+    cursor: pointer;
+  }
+  &__button{
+    align-self: flex-end;
+  }
+}
+
+.button{
+  color: $black;
+  font-family: 'AdobeClean', Helvetica, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 21px;
+  background-color: $yellow;
+  min-width: 160px;
+  padding: 11px 30px;
+  border: none;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover{
+    border-bottom-color: darken($yellow, 10%);
+  }
+}
+
+.input{
+  border: none;
+  outline: none;
+  border-bottom: 2px solid $light;
+  padding: 5px 0;
+  color: $dark;
+  font-family: 'AdobeClean', Helvetica, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  &:focus{
+    border-bottom-color: $blue;
+  }
+}
