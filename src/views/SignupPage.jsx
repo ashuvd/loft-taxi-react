@@ -25,7 +25,11 @@ export default class SignupPage extends React.Component {
   renderInputs(inputs) {
     return inputs.map((input) => {
       if (input.column) {
-        return this.renderInputs(input.column);
+        return (
+          <div className="form__column">
+            {this.renderInputs(input.column)}
+          </div>
+        );
       }
       return (
         <div className="form__row">
