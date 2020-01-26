@@ -5,21 +5,36 @@ import SignupPage from './views/SignupPage.jsx';
 import MapPage from './views/MapPage.jsx';
 import ProfilePage from './views/ProfilePage.jsx';
 import './assets/styles/index.scss'
+import PropTypes from 'prop-types';
+const { Provider, Consumer }  = React.createContext();
+
+Header.propTypes = {
+  setPage: PropTypes.func
+};
 
 const PAGES = {
-  login: (setPage) => <LoginPage setPage={setPage} />,
+  login: (setPage) => <Consumer>{({login}) => <LoginPage login={login} setPage={setPage} />}</Consumer>,
   signup: (setPage) => <SignupPage setPage={setPage} />,
-  map: () => <MapPage />,
-  profile: () => <ProfilePage />,
+  map: () => <Consumer>{({isLoggedIn}) => isLoggedIn && <MapPage />}</Consumer>,
+  profile: () => <Consumer>{({isLoggedIn}) => isLoggedIn && <ProfilePage />}</Consumer>,
 };
 
 function App() {
   const [page, setPage] = useState("login");
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ 
+  const login = (email, password) => {
+    setIsLoggedIn(true);
+  }
+  const logout = () => {
+    setIsLoggedIn(false);
+  }
   return (
     <div className="wrapper">
-      <Header setPage={setPage} />
-      {PAGES[page](setPage)}
+      <Provider value={{isLoggedIn, login, logout}}>
+        <Consumer>{({logout}) => <Header logout={logout} setPage={setPage} />}</Consumer>
+        {PAGES[page](setPage)}
+      </Provider>
     </div>
   );
 }

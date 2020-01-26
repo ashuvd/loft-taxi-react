@@ -1,10 +1,12 @@
 import React from 'react';
-export default function({setPage}) {
+
+export default function({setPage, logout}) {
   const pages = {
     login: 'Логин',
     signup: 'Регистрация',
     map: 'Карта',
-    profile: 'Профиль'
+    profile: 'Профиль',
+    exit: 'Выйти'
   }
   pages[Symbol.iterator] = function() {
     let i = 0;
@@ -22,6 +24,10 @@ export default function({setPage}) {
     e.preventDefault();
     setPage(page)
   }
+  const exit = (e) => {
+    e.preventDefault();
+    logout();
+  }
   return (
     <header className="header">
       <div className="container container_header">
@@ -33,11 +39,21 @@ export default function({setPage}) {
         <div className="header__right">
           <ul className="menu">
             {
-              [...pages].map(page => (
-                  <li key={page} className="menu__item">
-                    <a href={'#' + page} onClick={goToPage(page)} className="menu__link">{pages[page]}</a>
-                  </li>
-                )
+              [...pages].map(page => {
+                  if (page === 'exit') {
+                    return (
+                      <li key={page} className="menu__item">
+                        <a href={'#' + page} onClick={exit} className="menu__link">{pages[page]}</a>
+                      </li>
+                    )
+                  } else {
+                    return (
+                      <li key={page} className="menu__item">
+                        <a href={'#' + page} onClick={goToPage(page)} className="menu__link">{pages[page]}</a>
+                      </li>
+                    )
+                  }
+                }
               )
             }
           </ul>
