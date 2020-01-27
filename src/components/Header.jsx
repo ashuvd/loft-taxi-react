@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function({setPage, logout}) {
+const Header = ({setPage, logout}) => {
   const pages = {
     login: 'Логин',
     signup: 'Регистрация',
@@ -62,3 +63,9 @@ export default function({setPage, logout}) {
     </header>
   )
 }
+
+Header.propTypes = {
+  setPage: PropTypes.func.isRequired
+};
+
+export default Header;

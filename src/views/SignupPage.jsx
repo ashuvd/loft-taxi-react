@@ -1,32 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const SignupPage = ({setPage}) => {
+  const [signin, setSignin] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+
   const inputs = [
     {
       id: 'email',
       text: 'Адрес электронной почты',
+      value: signin,
+      handler: (e) => {
+        setSignin(e.target.value);
+      }
     },
     {
       column: [
         {
-          id: 'firstName',
+          id: 'name',
           text: 'Имя',
+          value: name,
+          handler: (e) => {
+            setName(e.target.value);
+          }
         },
         {
-          id: 'secondName',
+          id: 'surname',
           text: 'Фамилия',
+          value: surname,
+          handler: (e) => {
+            setSurname(e.target.value);
+          }
         },
       ],
     },
     {
       id: 'password',
       text: 'Пароль',
+      value: password,
+      handler: (e) => {
+        setPassword(e.target.value);
+      }
     }
   ];
 
   const renderInputs = (inputs) => {
-    return inputs.map(({column, id, text}, index) => {
+    return inputs.map(({column, id, text, value, handler}, index) => {
       if (column) {
         return (
           <div key={index} className="form__column">
@@ -37,7 +58,7 @@ const SignupPage = ({setPage}) => {
       return (
         <div key={id} className="form__row">
           <label htmlFor={id} className="form__label">{text}</label>
-          <input type="text" id={id} name={id} className="form__input input" />
+          <input value={value} type="text" id={id} name={id} className="form__input input" onChange={handler} />
         </div>
       )
     })
@@ -68,10 +89,10 @@ const SignupPage = ({setPage}) => {
               Уже зарегистрированы?
               <a href="#login" onClick={goToPageLogin} className="login__link">Войти</a>
             </div>
-            <form action="" className="login__form form">
+            <form onSubmit={goToPageMap} className="login__form form">
               {renderInputs(inputs)}
               <div className="form__row">
-                <button onClick={goToPageMap} className="form__button button">Зарегистрироваться</button>
+                <button type="submit" className="form__button button">Зарегистрироваться</button>
               </div>
             </form>
           </div>
@@ -82,7 +103,7 @@ const SignupPage = ({setPage}) => {
 }
 
 SignupPage.propTypes = {
-  setPage: PropTypes.func
+  setPage: PropTypes.func.isRequired
 }
 
 export default SignupPage;

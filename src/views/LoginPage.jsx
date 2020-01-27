@@ -8,31 +8,41 @@ const LoginPage = ({setPage, login}) => {
     {
       id: 'signin',
       text: 'Имя пользователя*',
+      value: signin,
+      handler: (e) => {
+        setSignin(e.target.value);
+      }
     },
     {
       id: 'password',
       text: 'Пароль*',
+      value: password,
+      handler: (e) => {
+        setPassword(e.target.value);
+      }
     }
   ];
-  const handlerSigninChange = (e) => {
-    setSignin(e.target.value);
-  }
-  const handlerPasswordChange = (e) => {
-    setPassword(e.target.value);
-  }
   const renderInputs = (inputs) => {
-    return inputs.map(({ id, text }) => {
+    return inputs.map(({ id, text, value, handler }) => {
       return (
         <div key={id} className="form__row">
           <label htmlFor={id} className="form__label">{text}</label>
-          <input value={id === 'signin' ? signin : password} type="text" id={id} data-testid={id} name={id} className="form__input input" onChange={id === 'signin' ? handlerSigninChange : handlerPasswordChange} />
+          <input 
+            value={value}
+            type="text"
+            id={id}
+            data-testid={id}
+            name={id}
+            className="form__input input"
+            onChange={handler} 
+          />
         </div>
       )
     })
   };
   const goToPageMap = (e) => {
     e.preventDefault();
-    login()
+    login(signin, password)
     setPage("map")
   };
   const goToPageSignup = (e) => {
@@ -69,8 +79,8 @@ const LoginPage = ({setPage, login}) => {
 }
 
 LoginPage.propTypes = {
-  setPage: PropTypes.func,
-  login: PropTypes.func,
+  setPage: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 }
 
 export default LoginPage;

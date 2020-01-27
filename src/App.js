@@ -5,12 +5,7 @@ import SignupPage from './views/SignupPage.jsx';
 import MapPage from './views/MapPage.jsx';
 import ProfilePage from './views/ProfilePage.jsx';
 import './assets/styles/index.scss'
-import PropTypes from 'prop-types';
 const { Provider, Consumer }  = React.createContext();
-
-Header.propTypes = {
-  setPage: PropTypes.func
-};
 
 const PAGES = {
   login: (setPage) => <Consumer>{({login}) => <LoginPage login={login} setPage={setPage} />}</Consumer>,
@@ -24,7 +19,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
  
   const login = (email, password) => {
-    setIsLoggedIn(true);
+    if (email && password) {
+      setIsLoggedIn(true);
+    }
   }
   const logout = () => {
     setIsLoggedIn(false);

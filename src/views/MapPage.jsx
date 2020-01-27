@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import mapboxToken from '../constants/mapboxToken.js';
 const MapboxLanguage = require('@mapbox/mapbox-gl-language');
