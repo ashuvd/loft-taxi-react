@@ -53,6 +53,7 @@ body {
   &_main{
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 }
 
@@ -86,6 +87,7 @@ a {
     }
   }
   &__row{
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
@@ -99,6 +101,17 @@ a {
   }
   &__button{
     align-self: flex-end;
+  }
+  &_card{
+    .form__row:last-child{
+      width: 116px;
+    }
+    .form__label{
+      font-size: 15px;
+    }
+    .form__input{
+      padding-right: 30px;
+    }
   }
 }
 
@@ -126,7 +139,7 @@ a {
   border: none;
   outline: none;
   border-bottom: 2px solid $light;
-  padding: 5px 0;
+  padding-top: 5px;
   color: $dark;
   font-family: 'AdobeClean', Helvetica, sans-serif;
   font-weight: 400;
@@ -134,5 +147,16 @@ a {
   font-size: 16px;
   &:focus{
     border-bottom-color: $blue;
+    &~.clear{
+      &:after, &:before{
+        background-color: $yellow;
+      }
+    }
+  }
+  &_background_color_yellow{
+    font-size: 24px;
+    &:focus{
+      border-bottom-color: $yellow;
+    }
   }
 }
