@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { setLogout } from '../store/modules/auth';
+import { useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 
-const Header = ({setPage, logout}) => {
+const Header = () => {
+  const dispatch = useDispatch();
   const pages = {
-    login: 'Логин',
-    signup: 'Регистрация',
     map: 'Карта',
     profile: 'Профиль',
     exit: 'Выйти'
@@ -21,13 +22,9 @@ const Header = ({setPage, logout}) => {
       }
     }
   }
-  const goToPage = (page) => (e) => {
-    e.preventDefault();
-    setPage(page)
-  }
   const exit = (e) => {
     e.preventDefault();
-    logout();
+    dispatch(setLogout());
   }
   return (
     <header className="header">
@@ -50,7 +47,9 @@ const Header = ({setPage, logout}) => {
                   } else {
                     return (
                       <li key={page} className="menu__item">
-                        <a href={'#' + page} onClick={goToPage(page)} className="menu__link">{pages[page]}</a>
+                        <NavLink to={`/${page}`} className="menu__link" exact={true} activeClassName="menu__link_active">
+                          {pages[page]}
+                        </NavLink>
                       </li>
                     )
                   }
@@ -63,9 +62,5 @@ const Header = ({setPage, logout}) => {
     </header>
   )
 }
-
-Header.propTypes = {
-  setPage: PropTypes.func.isRequired
-};
 
 export default Header;
