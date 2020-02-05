@@ -9,7 +9,7 @@ import ProfilePage from './views/ProfilePage.jsx';
 import PageNotFound from './views/PageNotFound.jsx';
 import './assets/styles/index.scss';
 import { useSelector } from 'react-redux';
-import { getIsAuth, fetchProfileRequest } from './store/modules/auth';
+import { getIsAuth } from './store/modules/auth';
 
 function App() {
   const isAuth = useSelector(getIsAuth);

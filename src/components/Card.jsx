@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 const Card = (
   {
@@ -13,6 +13,10 @@ const Card = (
     cardInputSubtitleValue,
     handleCardInputSubtitleValue
   }) => {
+  
+  const handleCardInputSubtitle = useCallback((e) => handleCardInputSubtitleValue(e.target.value));
+  const handleCardInputTitle = useCallback((e) => handleCardInputTitleValue(e.target.value));
+
   return (
     <div className="card">
       <form className="form form_card">
@@ -23,7 +27,7 @@ const Card = (
             value={cardInputTitleValue}
             type="text"
             className="form__input input input_background_color_yellow"
-            onChange={(e) => handleCardInputTitleValue(e.target.value)}
+            onChange={handleCardInputTitle}
           />
           <button type="button" className="form__clear clear"></button>
         </div>
@@ -35,7 +39,7 @@ const Card = (
             type={type}
             placeholder={placeholder}
             className="form__input input input_background_color_yellow"
-            onChange={(e) => handleCardInputSubtitleValue(e.target.value)}
+            onChange={handleCardInputSubtitle}
           />
         </div>
       </form>
@@ -59,6 +63,10 @@ Card.propTypes = {
   cardInputSubtitleValue: PropTypes.string.isRequired,
   handleCardInputTitleValue: PropTypes.func.isRequired,
   handleCardInputSubtitleValue: PropTypes.func.isRequired,
+};
+Card.defaultProps = {
+  back: false,
+  placeholder: ""
 };
 
 export default Card;

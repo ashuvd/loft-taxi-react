@@ -63,3 +63,5 @@ export const fetchProfileMiddleware = (store) => (next) => (action) => {
   }
   return next(action);
 }
+
+export default [authMiddleware, registerMiddleware, setProfileMiddleware, fetchProfileMiddleware];
