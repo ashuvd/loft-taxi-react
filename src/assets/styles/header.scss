@@ -29,4 +29,16 @@
       margin-right: 0;
     }
   }
+  &__link{
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    &_active{
+      background-color: $light;
+    }
+    &:hover{
+      background-color: $light;
+      text-decoration: none;
+    }
+  }
 }

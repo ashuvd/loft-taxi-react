@@ -7,9 +7,11 @@
   }
 }
 .login{
-  width: 503px;
+  min-width: 503px;
   background-color: $white;
-  padding: 60px 60px 60px 52px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
   &__title{
     font-weight: 700;
     font-size: 36px;
@@ -17,11 +19,14 @@
     color: $dark;
   }
   &__desc{
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   &__link{
     margin-left: 5px;
     display: inline-block;
     color: $blue;
+  }
+  &__form{
+    width: 100%;
   }
 }
