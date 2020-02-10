@@ -26,6 +26,14 @@ export const fetchProfileRequest = createAction("FETCH_PROFILE_REQUEST");
 export const fetchProfileSuccess = createAction("FETCH_PROFILE_SUCCESS");
 export const fetchProfileFailure = createAction("FETCH_PROFILE_FAILURE");
 
+export const fetchAddressListRequest = createAction("FETCH_ADDRESS_LIST_REQUEST");
+export const fetchAddressListSuccess = createAction("FETCH_ADDRESS_LIST_SUCCESS");
+export const fetchAddressListFailure = createAction("FETCH_ADDRESS_LIST_FAILURE");
+
+export const fetchRouteRequest = createAction("FETCH_ROUTE_REQUEST");
+export const fetchRouteSuccess = createAction("FETCH_ROUTE_SUCCESS");
+export const fetchRouteFailure = createAction("FETCH_ROUTE_FAILURE");
+
 export const setLogout = createAction("SET_LOGOUT");
 
 // Если не использовать createAction - альтернативный вариант

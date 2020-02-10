@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 const axiosDefaults = require('axios/lib/defaults');
 axiosDefaults.baseURL = 'https://loft-taxi.glitch.me/';
-
+console.log(createAppStore().getState())
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={createAppStore()}>

@@ -76,7 +76,6 @@ const SignupModal = ({ history }) => {
   const goToPageMap = (e) => {
     e.preventDefault();
     dispatch(setRegisterRequest({email: signin, password, name, surname}));
-    history.push('/map');
   };
 
   const goToPageLogin = (e) => {
