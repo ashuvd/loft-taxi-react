@@ -14,7 +14,7 @@ mapboxgl.accessToken = mapboxToken;
 
 const MapPage = () => {
   let mapContainer;
-  let map;
+  const [map, setMap] = useState(null);
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const addresses = useSelector(getAddresses);
@@ -23,30 +23,47 @@ const MapPage = () => {
 
   const handleChangeFrom = event => {
     setFrom(event.target.value);
+    const route = map.getLayer('route');
+    if (route) {
+      map.removeLayer(route.id);
+      map.removeSource(route.id);
+      setMap(map);
+    }
   };
   const handleChangeTo = event => {
     setTo(event.target.value);
+    const route = map.getLayer('route');
+    if (route) {
+      map.removeLayer(route.id);
+      map.removeSource(route.id);
+      setMap(map);
+    }
   };
 
   useEffect(() => {
-    map = new mapboxgl.Map({
+    if (map && coordinates.length) {
+      drawRoute(map, coordinates);
+      setMap(map);
+    }
+  }, [map, coordinates])
+
+
+  useEffect(() => {
+    const map = new mapboxgl.Map({
       container: mapContainer,
       style: 'mapbox://styles/mapbox/streets-v9',
       center: [16.05, 48],
       zoom: 2.9
     });
-    map.addControl(new MapboxLanguage({ defaultLanguage: 'ru' }));
     map.on('load', () => {
       dispatch(fetchAddressListRequest());
-      if (coordinates.length) {
-        drawRoute(map, coordinates);
-      }
     })
+    map.addControl(new MapboxLanguage({ defaultLanguage: 'ru' }));
+    setMap(map);
     return () => {
-      console.log('map')
       map.remove();
     };
-  }, [coordinates])
+  }, [])
 
   const callTaxi = (e) => {
     e.preventDefault();
