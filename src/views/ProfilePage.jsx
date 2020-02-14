@@ -29,8 +29,7 @@ const ProfilePage = () => {
   }
 
   useEffect(() => {
-    const { token } = localStorage.user ? JSON.parse(localStorage.user) : {};
-    dispatch(fetchProfileRequest(token));
+    dispatch(fetchProfileRequest());
   }, [])
 
   const handleCardNumber = (cardNumber) => {
