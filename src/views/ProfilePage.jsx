@@ -109,7 +109,7 @@ const ProfilePage = () => {
 
   let ProfileForm = ({handleSubmit}) => {
     return (
-      <form onSubmit={handleSubmit} className="form form_profile">
+      <form onSubmit={handleSubmit} className="form form_profile profile">
         <div className="profile__title">Профиль</div>
         <div className="profile__desc">Способ оплаты</div>
         <div className="profile__cards">

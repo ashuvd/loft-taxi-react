@@ -2,8 +2,8 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import reducer from './modules';
 // import authMiddlewares from './modules/auth/middlewares';
 import createSagaMiddleware from 'redux-saga';
-import { authorizationSaga, registrationSaga, setPaymentSaga, fetchPaymentSaga } from './modules/auth/sagas';
-import { addressListSaga, routeSaga } from './modules/address/sagas';
+import rootAuthSaga from './modules/auth/sagas';
+import rootAddressSaga from './modules/address/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,13 +18,8 @@ const createAppStore = () => {
       : noop => noop
     )
   )
-  sagaMiddleware.run(authorizationSaga);
-  sagaMiddleware.run(registrationSaga);
-  sagaMiddleware.run(setPaymentSaga);
-  sagaMiddleware.run(fetchPaymentSaga);
-  sagaMiddleware.run(addressListSaga);
-  sagaMiddleware.run(routeSaga);
-
+  sagaMiddleware.run(rootAuthSaga);
+  sagaMiddleware.run(rootAddressSaga);
   return store;
 }
 

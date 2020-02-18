@@ -2,29 +2,32 @@ import {
   fetchAddressListRequest, fetchAddressListSuccess, fetchAddressListFailure,
   fetchRouteRequest, fetchRouteSuccess, fetchRouteFailure,
 } from './actions';
-import { takeEvery, call, put } from 'redux-saga/effects';
-import axios from 'axios';
+import { getAddressList, getCoordinates } from './api';
+import { takeEvery, call, put, all } from 'redux-saga/effects';
 
-export function* addressListSaga() {
-  yield takeEvery(fetchAddressListRequest, function* (action) {
-    try{
-      console.log(action);
-      const response = yield call(() => axios.get('addressList'));
-      yield put(fetchAddressListSuccess(response.data));
-    } catch (error) {
-      yield put(fetchAddressListFailure(error));
-    }
-  })
+export function* addressListSaga(action) {
+  try{
+    console.log(action);
+    const response = yield call(getAddressList);
+    yield put(fetchAddressListSuccess(response.data));
+  } catch (error) {
+    yield put(fetchAddressListFailure(error));
+  }
 }
 
-export function* routeSaga() {
-  yield takeEvery(fetchRouteRequest, function* (action) {
-    try{
-      console.log(action);
-      const response = yield call(() => axios.get(`route?address1=${action.payload.from}&address2=${action.payload.to}`));
-      yield put(fetchRouteSuccess(response.data));
-    } catch (error) {
-      yield put(fetchRouteFailure(error));
-    }
-  })
+export function* routeSaga(action) {
+  try{
+    console.log(action);
+    const response = yield call(getCoordinates, action.payload.from, action.payload.to);
+    yield put(fetchRouteSuccess(response.data));
+  } catch (error) {
+    yield put(fetchRouteFailure(error));
+  }
 }
+
+export default function* rootSaga() {
+  yield all([
+    takeEvery(fetchAddressListRequest, addressListSaga),
+    takeEvery(fetchRouteRequest, routeSaga),
+  ])
+};
